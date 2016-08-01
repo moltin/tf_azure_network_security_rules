@@ -1,6 +1,6 @@
 resource "azurerm_network_security_rule" "http" {
     name = "http"
-    priority = "${element(split(",", var.priority), count.index)}"
+    priority = "${element(split(",", var.priority), 1)}"
     direction = "Inbound"
     access = "Allow"
     protocol = "Tcp"
@@ -14,7 +14,7 @@ resource "azurerm_network_security_rule" "http" {
 
 resource "azurerm_network_security_rule" "https" {
     name = "https"
-    priority = "${element(split(",", var.priority), count.index)}"
+    priority = "${element(split(",", var.priority), 2)}"
     direction = "Inbound"
     access = "Allow"
     protocol = "Tcp"
@@ -28,7 +28,7 @@ resource "azurerm_network_security_rule" "https" {
 
 resource "azurerm_network_security_rule" "ssh" {
     name = "ssh"
-    priority = "${element(split(",", var.priority), count.index)}"
+    priority = "${element(split(",", var.priority), 3)}"
     direction = "Inbound"
     access = "Allow"
     protocol = "Tcp"
@@ -42,7 +42,7 @@ resource "azurerm_network_security_rule" "ssh" {
 
 resource "azurerm_network_security_rule" "all" {
     name = "all"
-    priority = "${element(split(",", var.priority), count.index)}"
+    priority = "${element(split(",", var.priority), 4)}"
     direction = "Outbound"
     access = "Allow"
     protocol = "Tcp"
