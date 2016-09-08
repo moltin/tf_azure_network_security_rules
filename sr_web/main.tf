@@ -40,9 +40,23 @@ resource "azurerm_network_security_rule" "ssh" {
     network_security_group_name = "${var.network_security_group_name}"
 }
 
+resource "azurerm_network_security_rule" "lb-healthcheck" {
+    name = "lb-healthcheck"
+    priority = "${element(split(",", var.priority), 4)}"
+    direction = "Inbound"
+    access = "Allow"
+    protocol = "*"
+    source_port_range = "*"
+    destination_port_range = "42"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+    resource_group_name = "${var.resource_group_name}"
+    network_security_group_name = "${var.network_security_group_name}"
+}
+
 resource "azurerm_network_security_rule" "all" {
     name = "all"
-    priority = "${element(split(",", var.priority), 4)}"
+    priority = "${element(split(",", var.priority), 5)}"
     direction = "Outbound"
     access = "Allow"
     protocol = "Tcp"
